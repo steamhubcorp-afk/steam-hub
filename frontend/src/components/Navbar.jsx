@@ -15,7 +15,7 @@ const Navbar = () => {
                     {/* Logo / Brand */}
                     <div className="flex-shrink-0 flex items-center">
                         <Link to="/" className="text-2xl font-bold tracking-tighter uppercase font-sans">
-                            SteamHUB
+                            Steam<span className="text-[#FF5F1F]">HUB</span>
                         </Link>
                     </div>
 

@@ -97,7 +97,7 @@ const GameRow = ({ title, games }) => {
     return (
         <div className="relative">
             <div className="flex justify-between items-end mb-6 px-2">
-                <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight uppercase border-l-4 border-[#8000FF] pl-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-white tracking-tight uppercase border-l-4 border-[#FF5F1F] pl-4">
                     {title}
                 </h2>
                 <div className="flex gap-2">
@@ -173,7 +173,7 @@ const GameCard = ({ game }) => {
 
                     {/* Quick Add Button (Top Right of Card Image) */}
                     <button
-                        className="absolute top-3 right-3 bg-white/10 hover:bg-[#8000FF] text-white hover:text-white p-2 rounded-full backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-[-10px] group-hover:translate-y-0"
+                        className="absolute top-3 right-3 bg-white/10 hover:bg-[#FF5F1F] text-white hover:text-white p-2 rounded-full backdrop-blur-md transition-all duration-300 opacity-0 group-hover:opacity-100 transform translate-y-[-10px] group-hover:translate-y-0"
                         title="Quick Add to Cart"
                         onClick={handleAddToCart}
                     >

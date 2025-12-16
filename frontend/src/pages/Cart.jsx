@@ -46,7 +46,7 @@ const Cart = () => {
                                         <div className="flex-grow pr-8">
                                             <h3 className="text-xl font-bold mb-1">{item.title}</h3>
                                             <div className="flex flex-wrap gap-2 text-sm text-gray-400 mb-4">
-                                                <span className="bg-zinc-800 px-2 py-0.5 rounded text-xs uppercase font-bold tracking-wider text-[#8000FF]">
+                                                <span className="bg-zinc-800 px-2 py-0.5 rounded text-xs uppercase font-bold tracking-wider text-[#FF5F1F]">
                                                     {item.duration}
                                                 </span>
                                                 <span>• PC Edition</span>
@@ -92,7 +92,7 @@ const Cart = () => {
                                     </div>
                                     <div className="flex justify-between text-gray-400">
                                         <span>Discount</span>
-                                        <span className="text-[#8000FF] font-medium">₹0.00</span>
+                                        <span className="text-[#FF5F1F] font-medium">₹0.00</span>
                                     </div>
                                     <div className="border-t border-zinc-800 my-4 pt-4 flex justify-between items-center">
                                         <span className="text-lg font-bold">Total</span>
@@ -100,7 +100,7 @@ const Cart = () => {
                                     </div>
                                 </div>
 
-                                <button className="w-full bg-[#8000FF] hover:bg-[#6b02d1] text-white py-4 rounded-lg font-bold text-lg shadow-lg flex items-center justify-center gap-2 transition-colors">
+                                <button className="w-full bg-[#FF5F1F] hover:bg-[#e0480b] text-white py-4 rounded-lg font-bold text-lg shadow-lg flex items-center justify-center gap-2 transition-colors">
                                     <Lock size={20} />
                                     <span>Pay ₹{cartTotal.toFixed(2)}</span>
                                 </button>

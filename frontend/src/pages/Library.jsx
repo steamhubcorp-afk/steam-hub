@@ -64,7 +64,7 @@ const Library = () => {
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {ownedGames.map((game) => (
-                        <div key={game.id} className="bg-[#1a1a1a] rounded-xl overflow-hidden group border border-zinc-800 hover:border-[#8000FF] transition-all duration-300 hover:shadow-[0_0_20px_rgba(128,0,255,0.2)] hover:-translate-y-1">
+                        <div key={game.id} className="bg-[#1a1a1a] rounded-xl overflow-hidden group border border-zinc-800 hover:border-[#FF5F1F] transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,95,31,0.2)] hover:-translate-y-1">
                             {/* Image Area */}
                             <div className="relative aspect-video overflow-hidden">
                                 <img
@@ -76,7 +76,7 @@ const Library = () => {
 
                                 {/* Overlay Stats (Hidden by default, shown on hover) */}
                                 <div className="absolute inset-0 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/60 backdrop-blur-sm gap-3">
-                                    <button className="bg-[#8000FF] hover:bg-[#9a33ff] text-white px-6 py-2 rounded-full font-bold uppercase tracking-wide flex items-center gap-2 transform transition-transform hover:scale-105">
+                                    <button className="bg-[#FF5F1F] hover:bg-[#e0480b] text-white px-6 py-2 rounded-full font-bold uppercase tracking-wide flex items-center gap-2 transform transition-transform hover:scale-105">
                                         {game.status === "Installed" ? <Play size={18} fill="currentColor" /> : <Download size={18} />}
                                         {game.status === "Installed" ? "Play" : "Install"}
                                     </button>
@@ -85,7 +85,7 @@ const Library = () => {
 
                             {/* Content */}
                             <div className="p-4">
-                                <h3 className="text-lg font-bold text-white mb-3 line-clamp-1 group-hover:text-[#8000FF] transition-colors">
+                                <h3 className="text-lg font-bold text-white mb-3 line-clamp-1 group-hover:text-[#FF5F1F] transition-colors">
                                     {game.title}
                                 </h3>
 
@@ -103,7 +103,7 @@ const Library = () => {
                                 {/* Status Indicator */}
                                 <div className="mt-4 flex items-center gap-2 text-xs font-medium">
                                     <div className={`w-2 h-2 rounded-full ${game.status === "Installed" ? "bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]" :
-                                            game.status === "Update Queued" ? "bg-blue-500" : "bg-zinc-600"
+                                        game.status === "Update Queued" ? "bg-blue-500" : "bg-zinc-600"
                                         }`} />
                                     <span className={
                                         game.status === "Installed" ? "text-green-400" :

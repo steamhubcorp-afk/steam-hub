@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Play, Users, ShieldCheck, Gamepad2, ShoppingCart, LifeBuoy } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const TopGames = () => {
+    const navigate = useNavigate();
     // Game Data for Carousel
     const games = [
         {
@@ -9,9 +11,9 @@ const TopGames = () => {
             title: "Experience GTAV Enhanced",
             subtitle: "The Best Version on PC",
             tag: "GRAND THEFT AUTO V",
-            image: "/images/hero/gta5-bg.jpg",
-            logo: "/images/hero/gta5-logo.png",
-            color: "text-[#8000FF]"
+            image: "https://as1.ftcdn.net/v2/jpg/04/32/35/16/1000_F_432351685_yNndpVpFjzMpSmJ1r5w6bxYaglgcRW0F.jpg",
+            logo: "/images/hero/gta5.png",
+            color: "text-[#FF5F1F]"
         },
         {
             id: 2,
@@ -19,7 +21,7 @@ const TopGames = () => {
             subtitle: "Experience the next chapter.",
             tag: "MARVEL'S SPIDER-MAN 2",
             image: "/images/hero/spiderman2-bg.jpg",
-            logo: "/images/hero/spiderman2-logo.png",
+            logo: "/images/hero/spider.png",
             color: "text-red-500"
         },
         {
@@ -28,7 +30,7 @@ const TopGames = () => {
             subtitle: "Reimagine the horror.",
             tag: "RESIDENT EVIL 4",
             image: "/images/hero/re4-bg.jpg",
-            logo: "/images/hero/re4-logo.png",
+            logo: "/images/hero/rs4.png",
             color: "text-red-700"
         },
         {
@@ -37,7 +39,7 @@ const TopGames = () => {
             subtitle: "The saga continues.",
             tag: "GOD OF WAR RAGNARÖK",
             image: "/images/hero/gow-bg.jpg",
-            logo: "/images/hero/gow-logo.png",
+            logo: "/images/hero/gow.png",
             color: "text-blue-400"
         }
     ];
@@ -117,7 +119,7 @@ const TopGames = () => {
 
             {/* Trust Building Section (Scroll Reveal) */}
             <ScrollReveal>
-                <div className="w-full bg-[#121212] py-8 border-b-4 border-[#8000FF]/50">
+                <div className="w-full bg-[#121212] py-8 border-b-4 border-[#FF5F1F]/50">
                     <div className="max-w-7xl mx-auto px-4">
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/20">
                             <div className="flex flex-col items-center group p-4 cursor-default">
@@ -139,6 +141,62 @@ const TopGames = () => {
                     </div>
                 </div>
             </ScrollReveal>
+
+            {/* Gaming Partners Section */}
+            <div className="py-20 bg-[#0a0a0a] overflow-hidden border-b border-white/10 relative">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
+                <div className="text-center mb-12 relative z-10">
+                    <h3 className="text-2xl font-bold uppercase tracking-[0.2em] text-[#FF5F1F] mb-2">Top Providers</h3>
+                    <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter">Powering The Future</h2>
+                </div>
+
+                <div className="space-y-8 relative z-10">
+                    {/* Row 1: Left to Right */}
+                    <div className="flex gap-8 w-max animate-marquee-slow hover:pause">
+                        {["GRAND THEFT AUTO V", "RED DEAD REDEMPTION 2", "ELDEN RING", "GOD OF WAR", "SPIDER-MAN 2", "CYBERPUNK 2077", "CALL OF DUTY", "FORTNITE"].map((name, i) => (
+                            <div key={i} className="flex items-center justify-center bg-white/5 border border-white/10 px-12 py-6 rounded-lg backdrop-blur-sm min-w-[200px] hover:bg-white/10 hover:border-[#FF5F1F]/50 transition-all duration-300 group">
+                                <span className="text-xl font-bold text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest">{name}</span>
+                            </div>
+                        ))}
+                        {/* Duplicate for Loop */}
+                        {["GRAND THEFT AUTO V", "RED DEAD REDEMPTION 2", "ELDEN RING", "GOD OF WAR", "SPIDER-MAN 2", "CYBERPUNK 2077", "CALL OF DUTY", "FORTNITE"].map((name, i) => (
+                            <div key={`dup-${i}`} className="flex items-center justify-center bg-white/5 border border-white/10 px-12 py-6 rounded-lg backdrop-blur-sm min-w-[200px] hover:bg-white/10 hover:border-[#FF5F1F]/50 transition-all duration-300 group">
+                                <span className="text-xl font-bold text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest">{name}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Row 2: Right to Left */}
+                    <div className="flex gap-8 w-max animate-marquee-reverse hover:pause">
+                        {["THE WITCHER 3", "STARFIELD", "MINECRAFT", "APEX LEGENDS", "VALORANT", "LEAGUE OF LEGENDS", "OVERWATCH 2", "DOOM ETERNAL"].map((name, i) => (
+                            <div key={i} className="flex items-center justify-center bg-white/5 border border-white/10 px-12 py-6 rounded-lg backdrop-blur-sm min-w-[200px] hover:bg-white/10 hover:border-[#FF5F1F]/50 transition-all duration-300 group">
+                                <span className="text-xl font-bold text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest">{name}</span>
+                            </div>
+                        ))}
+                        {/* Duplicate for Loop */}
+                        {["THE WITCHER 3", "STARFIELD", "MINECRAFT", "APEX LEGENDS", "VALORANT", "LEAGUE OF LEGENDS", "OVERWATCH 2", "DOOM ETERNAL"].map((name, i) => (
+                            <div key={`dup-${i}`} className="flex items-center justify-center bg-white/5 border border-white/10 px-12 py-6 rounded-lg backdrop-blur-sm min-w-[200px] hover:bg-white/10 hover:border-[#FF5F1F]/50 transition-all duration-300 group">
+                                <span className="text-xl font-bold text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest">{name}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Row 3: Left to Right */}
+                    <div className="flex gap-8 w-max animate-marquee-slower hover:pause">
+                        {["RESIDENT EVIL 4", "FINAL FANTASY VII", "HORIZON FORBIDDEN WEST", "THE LAST OF US", "HALO INFINITE", "FORZA HORIZON 5", "DESTINY 2", "WARFRAME"].map((name, i) => (
+                            <div key={i} className="flex items-center justify-center bg-white/5 border border-white/10 px-12 py-6 rounded-lg backdrop-blur-sm min-w-[200px] hover:bg-white/10 hover:border-[#FF5F1F]/50 transition-all duration-300 group">
+                                <span className="text-xl font-bold text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest">{name}</span>
+                            </div>
+                        ))}
+                        {/* Duplicate for Loop */}
+                        {["RESIDENT EVIL 4", "FINAL FANTASY VII", "HORIZON FORBIDDEN WEST", "THE LAST OF US", "HALO INFINITE", "FORZA HORIZON 5", "DESTINY 2", "WARFRAME"].map((name, i) => (
+                            <div key={`dup-${i}`} className="flex items-center justify-center bg-white/5 border border-white/10 px-12 py-6 rounded-lg backdrop-blur-sm min-w-[200px] hover:bg-white/10 hover:border-[#FF5F1F]/50 transition-all duration-300 group">
+                                <span className="text-xl font-bold text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest">{name}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
 
             {/* Game Library Infinite Scroll Section */}
             <div className="relative w-full bg-black py-24 overflow-hidden group">
@@ -183,7 +241,10 @@ const TopGames = () => {
                     <p className="text-gray-300 text-lg md:text-xl font-medium mb-8 leading-relaxed max-w-lg drop-shadow-lg">
                         All Rockstar Games titles, from upcoming releases like Grand Theft Auto VI to the classics.
                     </p>
-                    <button className="group flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 transition-colors shadow-lg">
+                    <button
+                        onClick={() => navigate('/store')}
+                        className="group flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 transition-colors shadow-lg"
+                    >
                         <span>View All</span>
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -195,8 +256,24 @@ const TopGames = () => {
                         0% { transform: translateX(0); }
                         100% { transform: translateX(-50%); }
                     }
+                    @keyframes marquee-reverse {
+                         0% { transform: translateX(-50%); }
+                         100% { transform: translateX(0); }
+                    }
                     .animate-marquee {
                         animation: marquee 40s linear infinite;
+                    }
+                    .animate-marquee-slow {
+                        animation: marquee 60s linear infinite;
+                    }
+                    .animate-marquee-slower {
+                        animation: marquee 70s linear infinite;
+                    }
+                    .animate-marquee-reverse {
+                        animation: marquee-reverse 60s linear infinite;
+                    }
+                    .hover\:pause:hover {
+                        animation-play-state: paused;
                     }
                 `}</style>
             </div>
@@ -204,7 +281,7 @@ const TopGames = () => {
             {/* Usage Section (Replaces Newswire) */}
             <div className="bg-[#121212] py-20 px-4">
                 <div className="max-w-7xl mx-auto">
-                    <h3 className="text-3xl font-bold uppercase tracking-tight mb-10 border-l-4 border-[#8000FF]/50 pl-4">Usage</h3>
+                    <h3 className="text-3xl font-bold uppercase tracking-tight mb-10 border-l-4 border-[#FF5F1F]/50 pl-4">Usage</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* Usage Items */}
                         {[
@@ -219,7 +296,7 @@ const TopGames = () => {
                                 image: "https://placehold.co/1920x1080/202020/FFFFFF/png?text=VIDEO+THUMBNAIL" // Placeholder as requested
                             }
                         ].map((item, i) => (
-                            <div key={i} className="group cursor-pointer">
+                            <div key={i} onClick={() => navigate('/how-to-use')} className="group cursor-pointer">
                                 <div className="relative overflow-hidden rounded-lg mb-4 aspect-video bg-[#202020]">
                                     <img
                                         src={item.image}
@@ -234,7 +311,7 @@ const TopGames = () => {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <h4 className="text-2xl font-bold leading-tight group-hover:text-[#8000FF] transition-colors uppercase">
+                                    <h4 className="text-2xl font-bold leading-tight group-hover:text-[#FF5F1F] transition-colors uppercase">
                                         {item.title}
                                     </h4>
                                     <p className="text-gray-400 text-lg">
@@ -258,9 +335,9 @@ const TopGames = () => {
                         {/* Rockstar-style Support Header */}
                         <div className="relative">
                             <LifeBuoy className="w-16 h-16 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] animate-pulse-slow" strokeWidth={1.5} />
-                            <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#8000FF] rounded-full animate-ping" />
+                            <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#FF5F1F] rounded-full animate-ping" />
                         </div>
-                        <h2 className="text-5xl md:text-7xl font-bold text-white tracking-tighter drop-shadow-2xl">
+                        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tighter drop-shadow-2xl">
                             Support
                         </h2>
                     </div>
@@ -269,13 +346,13 @@ const TopGames = () => {
                         Get help with issues, browse common solutions, view service status updates, and more.
                     </p>
 
-                    <button className="bg-white text-black px-10 py-3 rounded-full font-bold text-xl hover:bg-[#8000FF] hover:text-white hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(128,0,255,0.4)] flex items-center gap-3 mx-auto">
+                    <button className="bg-white text-black px-10 py-3 rounded-full font-bold text-xl hover:bg-[#FF5F1F] hover:text-white hover:scale-105 transition-all duration-300 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(255,95,31,0.4)] flex items-center gap-3 mx-auto">
                         <span>Get Support</span>
                         <ArrowRight className="w-6 h-6" />
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

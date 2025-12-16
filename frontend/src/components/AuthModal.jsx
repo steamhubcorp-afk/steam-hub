@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { X, Eye, EyeOff, Mail, Lock, User as UserIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const AuthModal = () => {
-    const { isModalOpen, closeModal, login } = useAuth();
+    const { isModalOpen, closeModal, login, signup, loading, error: authError } = useAuth();
     const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Signup
     const [showPassword, setShowPassword] = useState(false);
 
@@ -15,15 +16,26 @@ const AuthModal = () => {
 
     if (!isModalOpen) return null;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Here you would normally handle API calls
-        // For now, we mock success
-        login(email);
-        // Reset form
-        setEmail('');
-        setPassword('');
-        setName('');
+
+        if (isLogin) {
+            const result = await login(email, password);
+            if (result.success) {
+                // Success handled in context (modal closes, user set)
+                toast.success("Successfully logged in!");
+            } else {
+                toast.error(result.message || "Login failed");
+            }
+        } else {
+            const result = await signup(name, email, password);
+            if (result.success) {
+                toast.success(result.message);
+                setIsLogin(true); // Switch to login after successful signup
+            } else {
+                toast.error(result.message || "Signup failed");
+            }
+        }
     };
 
     return (
@@ -35,7 +47,7 @@ const AuthModal = () => {
             />
 
             {/* Modal Container */}
-            <div className="relative w-full max-w-4xl bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-2xl flex flex-col md:flex-row min-h-[600px] border border-zinc-800 animate-in fade-in zoom-in duration-300">
+            <div className="relative w-full max-w-4xl bg-[#1a1a1a]  overflow-hidden shadow-2xl flex flex-col md:flex-row h-[700px] border border-zinc-800 animate-in fade-in zoom-in duration-300">
 
                 {/* Close Button Mobile (Top Right) */}
                 <button
@@ -48,12 +60,12 @@ const AuthModal = () => {
                 {/* Left Side - Branding / Visual */}
                 <div className="hidden md:flex md:w-1/2 bg-zinc-900 relative items-center justify-center overflow-hidden">
                     {/* Background Gradient Only */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#8000FF]/20 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#FF5F1F]/20 to-transparent"></div>
 
                     {/* Content */}
                     <div className="relative z-10 text-center p-8">
                         <h2 className="text-5xl font-black uppercase tracking-tighter text-white mb-4 drop-shadow-2xl">
-                            Steam<span className="text-[#8000FF]">HUB</span>
+                            Steam<span className="text-[#FF5F1F]">HUB</span>
                         </h2>
                         <p className="text-gray-300 text-lg font-light tracking-wide">
                             Your gateway to the ultimate gaming experience.
@@ -61,7 +73,7 @@ const AuthModal = () => {
                     </div>
 
                     {/* Decorative Elements */}
-                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#8000FF] rounded-full blur-[100px] opacity-20"></div>
+                    <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-[#FF5F1F] rounded-full blur-[100px] opacity-20"></div>
                 </div>
 
                 {/* Right Side - Form */}
@@ -84,24 +96,23 @@ const AuthModal = () => {
                         </p>
 
                         <form onSubmit={handleSubmit} className="space-y-5">
-                            {!isLogin && (
-                                <div className="space-y-2">
-                                    <label className="text-xs font-bold uppercase text-gray-500 tracking-wider">Full Name</label>
-                                    <div className="relative">
-                                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
-                                            <UserIcon size={18} />
-                                        </div>
-                                        <input
-                                            type="text"
-                                            required
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
-                                            className="w-full bg-[#1e1e1e] border border-zinc-800 focus:border-[#8000FF] rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-600 outline-none transition-all"
-                                            placeholder="John Doe"
-                                        />
+                            {/* Full Name Field with smooth transition */}
+                            <div className={`space-y-2 overflow-hidden transition-all duration-300 ease-in-out ${isLogin ? 'max-h-0 opacity-0' : 'max-h-24 opacity-100'}`}>
+                                <label className="text-xs font-bold uppercase text-gray-500 tracking-wider">Full Name</label>
+                                <div className="relative">
+                                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500">
+                                        <UserIcon size={18} />
                                     </div>
+                                    <input
+                                        type="text"
+                                        required={!isLogin}
+                                        value={name}
+                                        onChange={(e) => setName(e.target.value)}
+                                        className="w-full bg-[#1e1e1e] border border-zinc-800 focus:border-[#FF5F1F] rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-600 outline-none transition-all"
+                                        placeholder="John Doe"
+                                    />
                                 </div>
-                            )}
+                            </div>
 
                             <div className="space-y-2">
                                 <label className="text-xs font-bold uppercase text-gray-500 tracking-wider">Email Address</label>
@@ -114,7 +125,7 @@ const AuthModal = () => {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full bg-[#1e1e1e] border border-zinc-800 focus:border-[#8000FF] rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-600 outline-none transition-all"
+                                        className="w-full bg-[#1e1e1e] border border-zinc-800 focus:border-[#FF5F1F] rounded-lg py-3 pl-10 pr-4 text-white placeholder-gray-600 outline-none transition-all"
                                         placeholder="name@example.com"
                                     />
                                 </div>
@@ -131,7 +142,7 @@ const AuthModal = () => {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full bg-[#1e1e1e] border border-zinc-800 focus:border-[#8000FF] rounded-lg py-3 pl-10 pr-12 text-white placeholder-gray-600 outline-none transition-all"
+                                        className="w-full bg-[#1e1e1e] border border-zinc-800 focus:border-[#FF5F1F] rounded-lg py-3 pl-10 pr-12 text-white placeholder-gray-600 outline-none transition-all"
                                         placeholder="••••••••"
                                     />
                                     <button
@@ -144,7 +155,7 @@ const AuthModal = () => {
                                 </div>
                                 {isLogin && (
                                     <div className="flex justify-end">
-                                        <a href="#" className="text-xs text-[#8000FF] hover:text-[#9a33ff] transition-colors">
+                                        <a href="#" className="text-xs text-[#FF5F1F] hover:text-[#ff7f4d] transition-colors">
                                             Forgot password?
                                         </a>
                                     </div>
@@ -153,9 +164,14 @@ const AuthModal = () => {
 
                             <button
                                 type="submit"
-                                className="w-full bg-[#8000FF] hover:bg-[#9a33ff] text-white font-bold py-3.5 rounded-lg transition-all transform hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(128,0,255,0.4)] mt-4"
+                                disabled={loading}
+                                className={`w-full bg-[#FF5F1F] hover:bg-[#e0480b] text-white font-bold py-3.5 rounded-lg transition-all transform hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(255,95,31,0.4)] mt-4 flex items-center justify-center ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
                             >
-                                {isLogin ? 'Log In' : 'Sign Up'}
+                                {loading ? (
+                                    <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                ) : (
+                                    isLogin ? 'Log In' : 'Sign Up'
+                                )}
                             </button>
                         </form>
 
@@ -164,11 +180,36 @@ const AuthModal = () => {
                                 {isLogin ? "Don't have an account? " : "Already have an account? "}
                                 <button
                                     onClick={() => setIsLogin(!isLogin)}
-                                    className="text-white font-bold hover:text-[#8000FF] transition-colors"
+                                    className="text-white font-bold hover:text-[#FF5F1F] transition-colors"
                                 >
                                     {isLogin ? 'Sign up' : 'Log in'}
                                 </button>
                             </p>
+                        </div>
+
+                        {/* Social Login Section */}
+                        <div className="mt-8 flex flex-col gap-4">
+                            <div className="relative flex items-center justify-center">
+                                <div className="absolute inset-0 flex items-center">
+                                    <div className="w-full border-t border-zinc-800"></div>
+                                </div>
+                                <div className="relative bg-[#121212] px-4 text-[10px] uppercase text-gray-500 font-bold tracking-wider">
+                                    Or continue with
+                                </div>
+                            </div>
+
+                            <button
+                                type="button"
+                                className="relative w-full bg-white hover:bg-gray-100 text-black font-bold py-3.5 rounded-lg transition-all transform hover:-translate-y-0.5 hover:shadow-lg flex items-center justify-center gap-3 group"
+                            >
+                                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                                    <path d="M5.84 14.11c-.22-.66-.35-1.36-.35-2.11s.13-1.45.35-2.11V7.05H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.95l3.66-2.84z" fill="#FBBC05" />
+                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.05l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                                </svg>
+                                <span>Continue with Google</span>
+                            </button>
                         </div>
                     </div>
                 </div>

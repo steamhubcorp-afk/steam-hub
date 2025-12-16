@@ -8,11 +8,14 @@ import Cart from './pages/Cart';
 import Support from './pages/Support';
 import GameDetails from './pages/GameDetails';
 import Library from './pages/Library';
+import AdminUpload from './pages/AdminUpload';
 import { CartProvider } from './context/CartContext';
 import './App.css';
 
 import AuthModal from './components/AuthModal';
 import { AuthProvider } from './context/AuthContext';
+
+import { Toaster } from 'react-hot-toast';
 
 function App() {
     return (
@@ -20,6 +23,7 @@ function App() {
             <CartProvider>
                 <Router>
                     <Layout>
+                        <Toaster position="top-center" reverseOrder={false} />
                         <AuthModal />
                         <Routes>
                             <Route path="/" element={<Navigate to="/top-games" replace />} />
@@ -30,6 +34,7 @@ function App() {
                             <Route path="/library" element={<Library />} />
                             <Route path="/cart" element={<Cart />} />
                             <Route path="/support" element={<Support />} />
+                            <Route path="/admin/upload" element={<AdminUpload />} />
                         </Routes>
                     </Layout>
                 </Router>

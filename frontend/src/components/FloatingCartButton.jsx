@@ -15,7 +15,7 @@ const FloatingCartButton = () => {
     return (
         <button
             onClick={() => navigate('/cart')}
-            className="fixed top-24 right-8 z-50 bg-[#8000FF] hover:bg-[#6b02d1] text-white p-4 rounded-full shadow-[0_0_20px_rgba(128,0,255,0.5)] transition-all duration-300 hover:scale-110 group"
+            className="fixed top-24 right-8 z-50 bg-[#FF5F1F] hover:bg-[#e0480b] text-white p-4 rounded-full shadow-[0_0_20px_rgba(255,95,31,0.5)] transition-all duration-300 hover:scale-110 group"
             aria-label="View Cart"
         >
             <ShoppingCart size={24} className="group-hover:animate-bounce" />
