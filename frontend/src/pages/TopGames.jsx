@@ -35,7 +35,7 @@ const TopGames = () => {
         },
         {
             id: 4,
-            title: "Myths Are Made to Be Broken",
+            title: "Myths Made to Be Broken",
             subtitle: "The saga continues.",
             tag: "GOD OF WAR RAGNARÖK",
             image: "/images/hero/gow-bg.jpg",
