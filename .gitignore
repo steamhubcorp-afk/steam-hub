@@ -1,0 +1,14 @@
+Game
+payload
+steamhub-app
+cleaner.iss
+Cleanup.ps1
+config.json
+FetchAndClean.ps1
+ManageFiles.ps1
+setup.iss
+SteamConfigInstaller.exe
+test_date.ps1
+test_utc.ps1
+public
+.env
